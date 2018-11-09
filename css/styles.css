@@ -58,6 +58,17 @@ h3 {
     /* min-height: 175px; */
 }
 
+.year {
+    width: 35%;
+    float: left;
+    padding-right: 3%;
+}
+
+.award {
+    width: 62%;
+    float: left;
+}
+
 .uppercase {
     text-transform: uppercase;
 }
@@ -124,4 +135,35 @@ h3 ~ p{
 
 p + h3 {
     margin-top: 30px;
+}
+
+/* Skills 
+------------------------------------*/
+.skills {
+    background: #2B2D42;
+    color: #8D99AE;
+}
+
+p + h3 {
+    margin-top: 30px;
+}
+
+/* Languages 
+------------------------------------*/
+.languages {
+    background: #EDF2F4;
+}
+
+/* .languages p:first-of-type {
+    margin-top: 0;
+} */
+
+/* Awards 
+------------------------------------*/
+.awards {
+    background: #8D99AE;
+}
+
+.awards p:first-of-type {
+    margin-top: 0;
 }
