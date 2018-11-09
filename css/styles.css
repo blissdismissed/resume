@@ -1,3 +1,10 @@
+/* Color Palette
+#2B2D42 - dark blue
+#8D99AE - light blue
+#EDF2F4 - blue/white
+#EF233C - red
+*/
+
 /* Global styles 
 ------------------------------------*/
 html {
@@ -121,6 +128,26 @@ footer {
 }
 
 
+/* Navigation 
+------------------------------------*/
+nav {
+    text-align: center;
+    background: white;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+nav a {
+    display: inline-block;
+    padding: 15px 15px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+
+
 /* Work Experience 
 ------------------------------------*/
 .work {
@@ -154,10 +181,6 @@ p + h3 {
 .skills {
     background: #2B2D42;
     color: #8D99AE;
-}
-
-p + h3 {
-    margin-top: 30px;
 }
 
 /* Languages 
