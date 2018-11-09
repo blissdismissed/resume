@@ -69,6 +69,18 @@ h3 {
     float: left;
 }
 
+.colA {
+    width: 45%;
+    float: left;
+    padding-right: 3%;
+}
+
+.colB {
+    width: 52%;
+    float: left;
+    min-height: 200px;
+}
+
 .uppercase {
     text-transform: uppercase;
 }
@@ -154,9 +166,6 @@ p + h3 {
     background: #EDF2F4;
 }
 
-/* .languages p:first-of-type {
-    margin-top: 0;
-} */
 
 /* Awards 
 ------------------------------------*/
