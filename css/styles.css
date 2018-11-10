@@ -73,6 +73,7 @@ h3 {
     color: white;
     padding: 10px;
     display: inline-block;
+    z-index: 90;
 }
 
 .btn:hover {
@@ -130,6 +131,7 @@ nav {
     position: fixed;
     top: 0;
     width: 100%;
+    z-index: 100;
 }
 
 nav a {
@@ -138,6 +140,7 @@ nav a {
     text-decoration: none;
     text-transform: uppercase;
     font-weight: 700;
+    /* z-index: 100; */
 }
 
 nav a:hover {
@@ -234,9 +237,20 @@ p + h3 {
 @media (max-width: 849px) {
     header {
         text-align: center;
+        padding-top: 100px;
     }
 
     .profile-img {
         width: 200px;
     }
+
+    nav a {
+        font-size: 12px;
+        padding: 10px 15px;
+    }
+
+    h2 {
+        padding-top: 25px;
+    }
+
 }
