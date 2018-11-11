@@ -55,6 +55,7 @@ h3 {
 .year {
     width: 35%;
     float: left;
+    padding-left: 3%;
     padding-right: 3%;
 }
 
@@ -69,10 +70,24 @@ h3 {
 /* Download button */
 .btn {
     text-decoration: none;
-    background: #EF233C;
-    color: white;
+    color: #2B2D42;
     padding: 10px;
     display: inline-block;
+    animation: pull 3s ease-out 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes pull {
+    0% {
+        right: 75%;
+        color: #2B2D42;
+        background-color: #2B2D42;
+    }
+    100% {
+        right: 0;
+        background: #EF233C;
+        color: white;
+    }
 }
 
 .btn:hover {
@@ -109,7 +124,7 @@ header {
 .download {
     position: absolute;
     bottom: 0;
-    right: 0;
+    /* right: 0; */
 }
 
 /* Footer styles only */
