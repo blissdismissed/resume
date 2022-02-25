@@ -33,11 +33,15 @@ h1, h2 {
 }
 
 h1 {
-    font-size: 80px;
+    font-size: 4rem;
+}
+
+header h2 {
+    font-size: 2rem;
 }
   
 h2 {
-    font-size: 40px;
+    font-size: 3rem;
     margin-top: 0;
 }
 
@@ -247,6 +251,12 @@ p + h3 {
         width: 52%;
         float: left;
         min-height: 225px;
+    }
+}
+
+@media (max-width: 600px) {
+    #nav-container {
+        display: none;
     }
 }
 
