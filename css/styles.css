@@ -255,12 +255,11 @@ p + h3 {
 }
 
 @media (max-width: 48rem) {
+    /* Updated */
     #nav-container {
         display: none;
     }
-}
 
-@media (max-width: 48rem) {
     header {
         text-align: center;
         padding-top: 100px;
