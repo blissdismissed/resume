@@ -226,7 +226,7 @@ p + h3 {
 
 /* Media Queries 
 ------------------------------------*/
-@media (min-width: 850px) {
+@media (min-width: 48rem) {
     .column-narrow {
         width: 35%;
         float: left;
