@@ -254,13 +254,13 @@ p + h3 {
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 48rem) {
     #nav-container {
         display: none;
     }
 }
 
-@media (max-width: 849px) {
+@media (max-width: 48rem) {
     header {
         text-align: center;
         padding-top: 100px;
