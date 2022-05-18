@@ -262,7 +262,7 @@ p + h3 {
 
     header {
         text-align: center;
-        padding-top: 100px;
+        padding-top: 0;
     }
 
     .profile-img {
