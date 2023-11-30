@@ -1,0 +1,207 @@
+Github Actions
+
+const fetch = require("node-fetch");
+const options = require("./util/options");
+
+class PullDataService {
+  constructor({ user, repo }) {
+    Object.assign(this, { user, repo });
+    this.fetch = fetch;
+  }
+
+  async perform() {
+    const setOptions = options(
+      "/repos/" + this.user + "/" + this.repo + "/pulls"
+    );
+    this.url = setOptions.baseUrl + setOptions.hostName + setOptions.path;
+    this.options = {
+      method: "GET",
+      headers: setOptions.headers,
+    };
+
+    const response = await this.fetch(this.url, this.options);
+
+    this.data = await response.json();
+
+    return this;
+  }
+}
+
+async function outputApiData(pulldata, user, reponame) {
+  const output = await Promise.all(
+    pulldata.reverse().map(async element => {
+      const commitCount = await getCommitCount(element, user, reponame);
+      console.log("CommitCount: ", commitCount);
+
+      return {
+        id: element.id,
+        number: element.number,
+        title: element.title,
+        author: element.user.login,
+        commit_count: commitCount,
+      };
+    })
+  );
+
+  return output;
+}
+
+async function getCommitCount(element, user, reponame) {
+  let startPage = 1;
+  const commitsPerPage = 1;
+  let numberOfCommits = 0;
+  let commitData = [0];
+  while (commitData.length > 0) {
+    const commitOptions = options(
+      "/repos/" +
+        user +
+        "/" +
+        reponame +
+        "/pulls/" +
+        element.number +
+        "/commits?per_page=" +
+        commitsPerPage +
+        "&page=" +
+        startPage
+    );
+
+    const getCommitData = await fetch(
+      commitOptions.baseUrl + commitOptions.hostName + commitOptions.path,
+      {
+        method: "GET",
+        headers: commitOptions.headers,
+      }
+    );
+
+    commitData = await getCommitData.json();
+    numberOfCommits += commitData.length;
+    startPage += 1;
+  }
+  return numberOfCommits;
+}
+
+module.exports = {
+  // pullData: pullData
+  PullDataService,
+};
+
+// export { PullDataService };
+
+
+10:49
+
+
+Github Action Tests 
+
+// const options = require("../util/options");
+// const github = require("../github.actions");
+
+// import { PullDataService } from "../github.actions";
+
+const { PullDataService } = require("../github.actions");
+
+// const fetch = require("node-fetch");
+
+// const mockoOutputData = {
+//   id: 1,
+//   number: 2,
+//   title: "Test Pull Request",
+//   author: "Bob",
+//   commit_count: 4
+// };
+
+// jest.mock("../github.actions");
+// const mockGithubAction = require("../github.actions");
+
+// mockGithubAction.pullData = jest.fn((user, reponame) => {
+//   return mockoOutputData;
+// });
+
+// mockGithubAction.outputApiData = jest.fn((pulldata, user, reponame) => {
+//   return mockoOutputData;
+// });
+
+// mockGithubAction.getCommitCount = jest.fn((element, user, reponame) => {
+//   return 4;
+// });
+
+// const user = "john";
+// const reponame = "test-repo";
+
+// describe("test github action pullData function", () => {
+//   let result;
+//   describe("it should have two inputs of user and reponame", () => {
+//     beforeEach(async () => {
+//       result = await github.pullData(user, reponame);
+//     });
+
+//     it.only("should have the correct inputs and outputs", () => {
+//       expect(mockGithubAction.pullData.mock.calls[0][0]).toBe(user);
+//       expect(mockGithubAction.pullData.mock.calls[0][1]).toBe(reponame);
+//       expect(result).toEqual(mockoOutputData);
+
+//     });
+//   });
+// });
+
+// describe("test github action outputApiData function", () => {
+
+// });
+
+// describe("test github action getCommitCount function", () => {
+
+// });
+
+describe("PullDataService", () => {
+  let service = new PullDataService({});
+
+  beforeEach(() => {
+    service = new PullDataService({ user: "user-1", repo: "repo-1" });
+    jest.spyOn(service, "fetch").mockImplementation(async () => {
+      return {
+        json() {
+          return [
+            {
+              id: 1,
+              name: "Pull Request 1",
+            },
+            {
+              id: 2,
+              name: "Pull Request 2",
+            },
+          ];
+        },
+      };
+    });
+  });
+
+  afterEach(() => {
+    jest.resetAllMocks();
+  });
+
+  describe("#perform", () => {
+
+    it("It fetches data", async () => {
+      const { url, options, data } = await service.perform();
+
+      expect(url).toEqual("https://api.github.com/repos/user-1/repo-1/pulls");
+      expect(options).toEqual({
+        method: "GET",
+        headers: { "User-Agent": "blissdismissed" },
+      });
+      expect(data).toEqual([
+        {
+          id: 1,
+          name: "Pull Request 1",
+        },
+        {
+          id: 2,
+          name: "Pull Request 2",
+        },
+      ]);
+
+      // console.log("whats our service", result);
+      // const result = await pullData("user-1", "repo-1");
+    });
+  });
+});
